@@ -56,6 +56,7 @@ cds <- clusterCells(cds)
 table(pData(cds)$CellType)
 
 # ggplot graph cell type
+library(ggplot2)
 pie <- ggplot(pData(cds),
 aes(x = factor(1), fill = factor(CellType))) + geom_bar(width = 1)
 pie + coord_polar(theta = "y") +
@@ -111,7 +112,7 @@ plot_genes_branched_heatmap(cds2[conca2,],branch_point = 3,num_clusters = 2, cor
 genes <- row.names(subset(fData(cds2), gene_short_name %in% c("PSMB8", "MARCO", "CD68","TNFSF13","CALR")))
 plot_genes_branched_pseudotime(cds2[genes,], branch_point = 2, color_by = "group", ncol = 1)
 
-
+### end of code
 
 
 
