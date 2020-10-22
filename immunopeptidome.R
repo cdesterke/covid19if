@@ -39,3 +39,19 @@ small_pct<-results[,6:8]
 pheatmap(small_pct, color = colorRampPalette(c("navy", "white", "firebrick3"))(50),fontsize = 10,cutree_rows=5,
 cutree_col=3,,clustering_method = "ward.D2",clustering_distance_cols = "euclidean",clustering_distance_rows = "euclidean", show_colnames=T,
 annotation_names_col=F)
+
+# cross barplot between two categorial variables
+library(ggplot2)
+df <- data.frame(x = set$HLAABC, z = set$strong_binder)
+df <- as.data.frame(with(df, prop.table(table(x, z), margin = NULL)))
+
+plot <- ggplot(data = df, aes(x = x, y = Freq, fill = z)) + 
+   geom_bar(width = 0.9, position = "fill", stat = "identity") + 
+   scale_fill_brewer(palette = "Set1") + 
+   scale_y_continuous(expand = c(0.01, 0), labels = 
+   scales::percent_format()) + 
+   xlab("HLAABC") + 
+   ylab("Percent") + 
+   labs(fill = "strong_binder") + 
+   theme_classic(base_size = 14, base_family = "sans") + 
+   theme(legend.position = "right")
